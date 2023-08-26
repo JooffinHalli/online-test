@@ -1,0 +1,6 @@
+{
+  "name": "openapi-jsonifier",
+  "devDependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "online-test",
+  "version": "1.0.0",
+  "main": "out.js",
+  "scripts": {
+    "start": "cd esbuild && node esbuild.dev.mjs",
+    "build": "cd esbuild && node esbuild.prod.mjs",
+    "api": "cd npm-scripts && npm run api https://github.com/JooffinHalli/online-test.git main"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "esbuild": "^0.19.2",
+    "typescript": "^5.2.2"
+  }
+}
