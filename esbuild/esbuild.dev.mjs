@@ -4,6 +4,7 @@ import { commonConfig } from './esbuild.common.mjs';
 
 const { serve } = await context({
   ...commonConfig,
+  sourcemap: true,
   plugins: [
     new OpenBrowserPlugin()
   ]

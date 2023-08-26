@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "mock": "node _system/index.js",
+    "gen": "node _system/npm-scripts/gen.js",
+    "clear": "node _system/npm-scripts/clear.js",
+    "del": "node _system/npm-scripts/del.js"
+  }
+}

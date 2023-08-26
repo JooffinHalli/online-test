@@ -1,19 +1,22 @@
 const { Path, Template, Files } = require('../utils');
 
 /**
- * Генерирует src/api/openApi/typeDocs.ts файл,
- * в котором описывается тайпскриптовая документация для фронтового апи
- * @param {{ [k in 'paths' | 'components']: Record<string, any> }} openApiObj 
+ * Генерирует src/api/docs.ts файл,
+ * в котором описывается тайпскриптовая документация для фронтового апи.
+ * @param {{ [k in 'paths' | 'components' | 'servers']: Record<string, any> }} openApiObj 
  */
 function genOpenapiTypeDocs(openApiObj) {
-  const { repoLink, repoBranch } = this;
+
   const docs = new Docs(openApiObj);
   const template = Template.content(
-    repoLink,
-    repoBranch,
-    `export type Docs = ${docs.ts};`
+    `/** Документация эндпойнтов */\nexport type Docs = ${docs.ts};`
   );
-  Files.write('../../src/api/openApi/typeDocs.ts', template);
+  Files.write('../../src/api/docs.ts', template);
+
+  let urlsDeclaration = '/** возможный url */\ndeclare const __API_URL__:';
+  for (const { url } of openApiObj.servers) urlsDeclaration += `\n  | '${url}'`;
+  const urlsDeclarationTemplate = Template.content(urlsDeclaration);
+  Files.write('../../src/api/declarations.d.ts', urlsDeclarationTemplate);
 }
 
 module.exports = genOpenapiTypeDocs;

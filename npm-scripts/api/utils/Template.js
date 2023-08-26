@@ -1,3 +1,6 @@
+let _repoLink = ''
+let _repoBranch = '';
+
 class Template {
 
   /**
@@ -5,7 +8,7 @@ class Template {
    * @param {string} repoBranch
    * @param {string} string
    */
-  static content(repoLink, repoBranch, string) {
+  static content(string, repoLink = _repoLink, repoBranch = _repoBranch) {
     return `/**
 *  ...................................................................................
 *  . этот файл сгенерирован автоматически при помощи скрипта "npm run api"           
@@ -16,6 +19,12 @@ class Template {
 */
 
 ${string}`;
+  }
+
+  /** Запомнить repoLink и repoBranch */
+  static bindContent(repoLink, repoBranch) {
+    _repoLink = repoLink;
+    _repoBranch = repoBranch;
   }
 
 }

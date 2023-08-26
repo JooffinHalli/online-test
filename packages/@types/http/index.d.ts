@@ -1,5 +1,5 @@
 declare namespace Http {
-  declare type RequestHeaders = _Headers | DeepReadonly<_Headers>
+  declare interface RequestHeaders extends HeadersInit extends _Headers extends DeepReadonly<_Headers> {}
   declare type Method =
     | "GET"
     | "POST"

@@ -5,9 +5,15 @@
   "scripts": {
     "start": "cd esbuild && node esbuild.dev.mjs",
     "build": "cd esbuild && node esbuild.prod.mjs",
-    "api": "cd npm-scripts && npm run api https://github.com/JooffinHalli/online-test.git main"
+    "api": "cd npm-scripts && npm run api https://github.com/JooffinHalli/online-test.git main",
+    "mock": "cd serverMock && npm run mock",
+    "gen": "cd serverMock && npm run gen",
+    "del": "cd serverMock && npm run del",
+    "clear": "cd serverMock && npm run clear"
   },
   "dependencies": {
+    "mobx": "^6.10.0",
+    "mobx-react-lite": "^4.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
