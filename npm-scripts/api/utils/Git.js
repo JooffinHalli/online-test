@@ -28,8 +28,8 @@ class Git {
   static clone = (repoLink, repoBranch, repoName) => {
     try {
       Logger.log(`Clonning repository ${repoName}...`);
-      // const branch = repoBranch ? `--branch ${repoBranch} --single-branch ` : '';
-      // child_process.execSync(`git clone ${branch}${repoLink}`);
+      const branch = repoBranch ? `--branch ${repoBranch} --single-branch ` : '';
+      child_process.execSync(`git clone ${branch}${repoLink}`);
     }
     catch (e) {
       Process.end('Ошибка во время клонирования репозитория', e);
