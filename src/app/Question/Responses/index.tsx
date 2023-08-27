@@ -1,14 +1,17 @@
 import { FC } from 'react';
 import { Questions as QuestionsRes } from 'api';
+import { _ } from 'utils';
 import { Response } from './Response';
 
-const renderResponse = (response: QuestionsRes[number]['responses'][number]) => {
+type QuestionResponses = _.Defined<QuestionsRes[number]['responses']>;
+
+const renderResponse = (response: QuestionResponses[number]) => {
   return <Response key={response.id} response={response} />
 }
 
 export const Responses: FC<{
 
-  items: QuestionsRes[number]['responses']
+  items: QuestionResponses
 
 }> = ({ items }) => {
   

@@ -44,17 +44,21 @@ components:
       required:
         - id
         - question
-        - isMulti
-        - responses
+        - type
       properties:
         id:
           type: integer
           format: int64
         question:
           type: string
-        isMulti:
-          type: boolean
-          description: если true, то ожидаются несколько ответов, иначе ожидается один
+          description: Текст вопроса
+        type:
+          type: string
+          enum:
+            - radio
+            - checkbox
+            - input
+            - textarea
         responses:
           type: array
           items:
@@ -72,3 +76,10 @@ components:
           format: int64
         content:
           type: string
+        type:
+          type: string
+          enum:
+            - radio
+            - checkbox
+            - input
+            - textarea

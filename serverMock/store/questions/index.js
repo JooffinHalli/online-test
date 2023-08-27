@@ -2,7 +2,7 @@ module.exports = [
   {
     id: 1,
     question: 'Что такое yaml?',
-    isMulti: false,
+    type: 'radio',
     responses: [
       { id: 1, content: 'Язык разметки' },
       { id: 2, content: 'Не язык разметки' }
@@ -11,7 +11,7 @@ module.exports = [
   {
     id: 2,
     question: 'Что из перечисленного не является ООП принципом?',
-    isMulti: true,
+    type: 'checkbox',
     responses: [
       { id: 1, content: 'Наследование' },
       { id: 2, content: 'Замыкание' },
@@ -23,7 +23,7 @@ module.exports = [
   {
     id: 3,
     question: 'Что из перечисленного язык программирования?',
-    isMulti: false,
+    type: 'radio',
     responses: [
       { id: 1, content: 'Jenkins' },
       { id: 2, content: 'Go' },
@@ -35,7 +35,7 @@ module.exports = [
   {
     id: 4,
     question: 'Какова сложность? <pre>[1, 2, 3].reduce((acc, item) => ([...acc, item], acc))</pre>',
-    isMulti: true,
+    type: 'radio',
     responses: [
       { id: 1, content: 'константная' },
       { id: 2, content: 'линейная' },
@@ -45,68 +45,37 @@ module.exports = [
   },
   {
     id: 5,
-    question: 'Реакт это фреймворк ил библиотека?',
-    isMulti: true,
-    responses: [
-      { id: 1, content: 'константная' },
-      { id: 2, content: 'линейная' },
-      { id: 3, content: 'логарифмическая' },
-      { id: 4, content: 'квадратичная' }
-    ]
+    question: 'Что такое инкапсуляция в ООП?',
+    type: 'textarea'
   },
   {
     id: 6,
-    question: 'Реакт это фреймворк ил библиотека?',
-    isMulti: true,
-    responses: [
-      { id: 1, content: 'константная' },
-      { id: 2, content: 'линейная' },
-      { id: 3, content: 'логарифмическая' },
-      { id: 4, content: 'квадратичная' }
-    ]
+    question: 'Как расшифровывается DRY?',
+    type: 'input'
   },
   {
     id: 7,
-    question: 'Реакт это фреймворк ил библиотека?',
-    isMulti: true,
-    responses: [
-      { id: 1, content: 'константная' },
-      { id: 2, content: 'линейная' },
-      { id: 3, content: 'логарифмическая' },
-      { id: 4, content: 'квадратичная' }
-    ]
+    question: 'Какие плюсы и минусы есть у мьютабельности?',
+    type: 'textarea'
   },
   {
     id: 8,
-    question: 'Реакт это фреймворк ил библиотека?',
-    isMulti: true,
+    question: 'Javascript это:',
+    type: 'radio',
     responses: [
-      { id: 1, content: 'константная' },
-      { id: 2, content: 'линейная' },
-      { id: 3, content: 'логарифмическая' },
-      { id: 4, content: 'квадратичная' }
+      { id: 1, content: 'функциональный ЯП' },
+      { id: 2, content: 'объектно ориентированный ЯП' },
+      { id: 3, content: 'Свой вариант', type: 'textarea' }
     ]
   },
   {
     id: 9,
-    question: 'Реакт это фреймворк ил библиотека?',
-    isMulti: true,
-    responses: [
-      { id: 1, content: 'константная' },
-      { id: 2, content: 'линейная' },
-      { id: 3, content: 'логарифмическая' },
-      { id: 4, content: 'квадратичная' }
-    ]
+    question: 'Реакт это фреймворк или библиотека?',
+    type: 'textarea'
   },
   {
     id: 10,
-    question: 'Реакт это фреймворк ил библиотека?',
-    isMulti: true,
-    responses: [
-      { id: 1, content: 'константная' },
-      { id: 2, content: 'линейная' },
-      { id: 3, content: 'логарифмическая' },
-      { id: 4, content: 'квадратичная' }
-    ]
+    question: 'Сколько типов данных в js?',
+    type: 'input'
   }
 ];

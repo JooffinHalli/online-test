@@ -12,6 +12,7 @@
     "clear": "cd serverMock && npm run clear"
   },
   "dependencies": {
+    "antd": "^5.8.4",
     "mobx": "^6.10.0",
     "mobx-react-lite": "^4.0.4",
     "react": "^18.2.0",

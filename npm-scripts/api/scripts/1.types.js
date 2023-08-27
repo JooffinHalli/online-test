@@ -206,7 +206,8 @@ class SchemaHandler {
   }
 
   #handle(schema) {
-    const type = schema.type || (('items' in schema) ? 'array' : undefined);
+    let type = schema.type || (('items' in schema) ? 'array' : undefined);
+    if (schema.enum?.length) type = 'enum';
     const handler = this.#TYPE_HANDLER[type];
     this.#acc = handler(schema);
   }
@@ -215,6 +216,7 @@ class SchemaHandler {
     'boolean': this.#handleBoolean.bind(this),
     'integer': this.#handleInteger.bind(this),
     'string': this.#handleString.bind(this),
+    'enum': this.#handleEnum.bind(this),
     'object': this.#handleObject.bind(this),
     'array': this.#handleArray.bind(this)
   }
@@ -222,6 +224,10 @@ class SchemaHandler {
   #handleBoolean() { return 'boolean'; }
   #handleInteger() { return 'number'; }
   #handleString() { return 'string'; }
+
+  #handleEnum(schema) {
+    return schema.enum?.map((value) => `'${value}'`).join(' | ');
+  }
 
   #handleObject(schema) {
     const acc = {};

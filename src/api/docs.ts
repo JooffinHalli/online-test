@@ -16,11 +16,12 @@ export type Docs = {
         {
           id: number
           question: string
-          isMulti: boolean
-          responses: Array<
+          type: 'radio' | 'checkbox' | 'input' | 'textarea'
+          responses?: Array<
             {
               id: number
               content: string
+              type?: 'radio' | 'checkbox' | 'input' | 'textarea'
             }
           >
         }

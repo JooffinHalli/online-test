@@ -28,11 +28,3 @@
   height: 50%;
   width: 80%;
 }
-
-pre {
-  background: var(--color-grey-light);
-  width: min-content;
-  height: min-content;
-  padding: 4px;
-  font-style: italic;
-}

@@ -10,8 +10,6 @@ export const Step: FC<{
 
 }> = observer(({ id }) => {
   const { currentQuestionNumber, setCurrentQuestionNumber } = root.questions.progress;
-
-  console.log(id, currentQuestionNumber);
   
   const classes = cn(
     styles.step,
