@@ -1,0 +1,6 @@
+.headerWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 5px 0;
+}

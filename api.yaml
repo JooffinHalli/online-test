@@ -9,58 +9,66 @@ servers:
     description: Локальный моковый сервер
     
 tags:
-  - name: tests
-    description: методы, возвращающие тесты
+  - name: questions
+    description: вопросы для теста
 
 paths:
-  /tests:
+  /questions:
     get:
       tags:
-        - tests
-      summary: Возвращает массив тестов
-      operationId: getTests
-      parameters:
-        - $ref: "#/components/parameters/length"
+        - questions
+      summary: Возвращает массив вопросов для теста
+      operationId: getQuestions
       responses:
         200:
-          $ref: "#/components/responses/TestsResponse"
+          $ref: "#/components/responses/QuestionsResponse"
 
 #  -------------------------------------------------------------------------------------------------------------------
 
 components:
   responses:
-    TestsResponse:
+    QuestionsResponse:
       description: successful operation
       content:
         application/json:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/TestModel"
+              $ref: "#/components/schemas/QuestionModel"
 
   schemas:
-    TestModel:
-      title: TestModel
+    QuestionModel:
+      title: QuestionModel
       type: object
-      description: Фильтр
+      description: Вопсрос для теста
       required:
         - id
-        - name
+        - question
+        - isMulti
+        - responses
       properties:
         id:
           type: integer
           format: int64
-        name:
+        question:
           type: string
-      example:
-        id: 1
-        name: первый тест
-
-  parameters:
-    length:
-      name: length
-      in: query
-      description: количество тестов
-      required: true
-      schema:
-        type: integer
+        isMulti:
+          type: boolean
+          description: если true, то ожидаются несколько ответов, иначе ожидается один
+        responses:
+          type: array
+          items:
+            $ref: "#/components/schemas/QuestionResponseModel"
+    QuestionResponseModel:
+      title: QuestionResponseModel
+      type: object
+      description: Ответ на вопрос
+      required:
+        - id
+        - content
+      properties:
+        id:
+          type: integer
+          format: int64
+        content:
+          type: string

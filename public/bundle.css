@@ -1,2 +1,2 @@
-.o{color:red}
+.i{font-size:calc(var(--index) * 1.5);font-weight:700;line-height:var(--index);height:calc(var(--index) * 1.4)}.e{padding:4px}.n{font-size:var(--index);line-height:calc(var(--index) * .9);height:var(--index)}.a{display:flex;align-items:center;gap:20px;padding:5px 0}.t{background:rgb(225,224,224);width:100%;height:10px}.g{background:rgb(29,25,25)}.r{background:rgb(188,62,62)}.d{width:100%;display:flex;gap:5px;margin:0 0 20px}.h{font-weight:600;margin-bottom:30px}:root{--index:calc(1vw + 1vh);--color-main: rgb(16, 16, 16)}*{padding:0;margin:0;box-sizing:border-box}.o{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;color:var(--color-main)}.x{height:50%;width:80%}
 /*# sourceMappingURL=bundle.css.map */

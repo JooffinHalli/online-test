@@ -1,3 +1,3 @@
 module.exports = {
-  ['tests']: require('./tests'),
+  ['questions']: require('./questions'),
 }

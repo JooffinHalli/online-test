@@ -1,0 +1,9 @@
+.timerWrapper {
+  padding: 4px;
+}
+
+.timer {
+  font-size: var(--index);
+  line-height: calc(var(--index) * 0.9);
+  height: var(--index);
+}

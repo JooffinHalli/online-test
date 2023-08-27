@@ -9,7 +9,7 @@
 
 /** Говорит, какие есть эндпойнты и методы */
 export const endpoints = {
-  tests: [
+  questions: [
     'get'
   ]
 } as const;

@@ -5,10 +5,10 @@
 */
 
 type StoreKey =
-  | 'tests'
+  | 'questions'
   
 /**
- * глобально доступен только из файлов store/<tests>/index.ts. store можно мутировать
+ * глобально доступен только из файлов store/<questions>/index.ts. store можно мутировать
  */
 declare const store: { [K in StoreKey]: any }
 

@@ -1,0 +1,6 @@
+.title {
+  font-size: calc(var(--index) * 1.5);
+  font-weight: 700;
+  line-height: var(--index);
+  height: calc(var(--index) * 1.4);
+}

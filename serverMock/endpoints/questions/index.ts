@@ -1,7 +1,7 @@
 ({
 
   get({ slashParams, queryParams }: Params) {
-    return store['tests'];
+    return store['questions'];
   },
 
   post({ slashParams, queryParams, body }: Params) {

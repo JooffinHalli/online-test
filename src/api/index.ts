@@ -6,3 +6,5 @@ export const api = buildApi<Docs>({
   url: 'http://localhost:7777',
   endpoints
 });
+
+export * from './docs';

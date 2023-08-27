@@ -12,10 +12,11 @@ const runMainScript = (repoLink, repoBranch) => {
   Git.assertLink(repoLink);
   const repoName = Git.getRepoName(repoLink);
   Files.removeFolderSafe(repoName);
-  Git.clone(repoLink, repoBranch, repoName);
-  Git.assertClonning(`./${repoName}`);
+  // Git.clone(repoLink, repoBranch, repoName);
+  Git.assertClonning(`../../`);
 
-  fs.readFile(`./${repoName}/api.yaml`, null, (err, yamlContent) => {
+  fs.readFile(`../../api.yaml`, null, (err, yamlContent) => {
+  // fs.readFile(`./${repoName}/api.yaml`, null, (err, yamlContent) => {
     if (err) Process.end('ошибка во время чтения файла `api.yaml`', err);
     new OpenApiJSONifier(yamlContent, {
       beforeScripts: [genOpenapiEndpoints],

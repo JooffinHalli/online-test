@@ -9,18 +9,24 @@
 
 /** Документация эндпойнтов */
 export type Docs = {
-  'tests': {
-    path: `tests`
+  'questions': {
+    path: `questions`
     get: {
-      params: {
-        length: number
-      }
       res: Array<
         {
           id: number
-          name: string
+          question: string
+          isMulti: boolean
+          responses: Array<
+            {
+              id: number
+              content: string
+            }
+          >
         }
       >
     }
   }
 };
+
+export type Questions = Docs['questions']['get']['res'];

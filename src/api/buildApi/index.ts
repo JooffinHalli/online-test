@@ -16,8 +16,6 @@ import { handleResDefault, logError, normalizeHeaders, serializeParams, serializ
 export const buildApi = <D extends DocsBase>(config: Config<D>): BackendService<D> => {
   const _config: any = config; // any is ok inside of this function
 
-  const cache = new Map<string, { data: unknown, cacheLifeTime: number, timestamp: number }>();
-
   const api = {} as any;
 
   for (const endpoint in _config.endpoints) {
@@ -28,9 +26,10 @@ export const buildApi = <D extends DocsBase>(config: Config<D>): BackendService<
 
       const handleErr = (err: Error) => {
         logError(endpoint, method, err.message);
+        throw err;
       }
 
-      const methodFn = async (args: any = {}) => {
+      const methodFn = (args: any = {}) => {
         const {
           path,
           params,

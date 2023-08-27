@@ -1,0 +1,6 @@
+.steps {
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  margin: 0 0 20px 0;
+}

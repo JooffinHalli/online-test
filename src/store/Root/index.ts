@@ -1,16 +1,11 @@
-import { api } from 'api';
-import { Docs } from 'api/docs';
-import { makeAutoObservable } from 'mobx';
+import { Alerts } from './Alerts';
+import { Questions } from './Questions';
 
 export class Root {
   constructor() {
-    makeAutoObservable(this);
+    this.questions.loadQuestions();
   }
 
-  data: Docs['tests']['get']['res'] = [];
-
-  getList = async () => {
-    const res = await api.tests.get({ params: { length: 1 } });
-    this.data = res;
-  }
+  alerts = new Alerts();
+  questions = new Questions();
 }

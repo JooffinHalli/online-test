@@ -8,8 +8,15 @@ const { Path, Template, Files } = require('../utils');
 function genOpenapiTypeDocs(openApiObj) {
 
   const docs = new Docs(openApiObj);
+  let entities = '';
+  for (const path in openApiObj.paths) {
+    if (!('get' in openApiObj.paths[path])) break;
+    const _path = Path.normalize(path);
+    const [firstLetter, ...rest] = _path;
+    entities += `\nexport type ${firstLetter.toUpperCase()}${rest.join('')} = Docs['${_path}']['get']['res'];`
+  }
   const template = Template.content(
-    `/** Документация эндпойнтов */\nexport type Docs = ${docs.ts};`
+    `/** Документация эндпойнтов */\nexport type Docs = ${docs.ts};\n${entities}`
   );
   Files.write('../../src/api/docs.ts', template);
 
