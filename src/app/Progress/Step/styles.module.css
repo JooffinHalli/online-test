@@ -1,7 +1,8 @@
 .step {
-  background: rgb(225, 224, 224);
+  background: var(--color-grey-light);
   width: 100%;
   height: 10px;
+  cursor: pointer;
 }
 
 .passed {
@@ -9,5 +10,5 @@
 }
 
 .selected {
-  background: rgb(188, 62, 62);
+  background: var(--color-red);
 }

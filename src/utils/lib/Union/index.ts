@@ -1,16 +1,12 @@
-import { $nonEmptyObject } from 'mobx-state-tree/dist/internal';
 import { Arr } from 'utils';
 
 /** утилиты для юнионов */
 export namespace Union {
 
-  /** Очищает юнион от системных типов */
-  export type Clear<T> = T extends (typeof $nonEmptyObject | symbol) ? never : T;
-
   /** достает из юниона только строки */
   export type String<T> = T extends (`${infer X}` | string) ? X & T : never;
 
-  /** превразает юнион в массив */
+  /** превразает юнион в картеж */
   export type ToTupple<
     T, Acc extends unknown[] = [], Last = LastElement<T>
   > = [T] extends [never] ? Acc : ToTupple<Exclude<T, Last>, Arr.Prepend<Acc, Last>>;

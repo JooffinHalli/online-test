@@ -1,25 +1,38 @@
 :root {
   --index: calc(1vw + 1vh);
-  --color-main: rgb(16, 16, 16);
+  --color-grey-dark: #121212;
+  --color-grey-light: #e1e1e1;
+  --color-red: #b92a35;
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  border-radius: 4px;
+  font-size: max(14px, calc(var(--index) * 0.8));
 }
 
 .app {
   width: 100vw;
   height: 100vh;
+  min-width: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: sans-serif;
-  color: var(--color-main);
+  color: var(--color-grey-dark);
 }
 
 .content {
   height: 50%;
   width: 80%;
+}
+
+pre {
+  background: var(--color-grey-light);
+  width: min-content;
+  height: min-content;
+  padding: 4px;
+  font-style: italic;
 }

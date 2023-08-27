@@ -7,3 +7,7 @@
   line-height: calc(var(--index) * 0.9);
   height: var(--index);
 }
+
+.over {
+  color: var(--color-red);
+}

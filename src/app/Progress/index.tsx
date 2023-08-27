@@ -5,7 +5,7 @@ import { Step } from './Step';
 import styles from './styles.module.css';
 
 export const Progress: FC = observer(() => {
-  const { currentQuestionNumber, items } = root.questions.progress;
+  const { items } = root.questions.progress;
 
   return (
     <div className={styles.steps}>
@@ -13,8 +13,7 @@ export const Progress: FC = observer(() => {
         return (
           <Step
             key={stepNumber}
-            isSelected={stepNumber === currentQuestionNumber}
-            wasPassed={stepNumber > currentQuestionNumber}
+            id={stepNumber}
           />
         );
       })}

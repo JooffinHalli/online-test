@@ -13,7 +13,13 @@ export class Progress {
 
   /** массив, чтобы проитерироваться по нему в компоненте */
   get items() {
-    return Array.from<number>({ length: this.questionsCount });
+    return Array.from({ length: this.questionsCount }, this.#sequenceMapper);
+  }
+
+  #sequenceMapper = (value: number, i: number) => i;
+
+  setCurrentQuestionNumber = (value: number) => {
+    this.currentQuestionNumber = value;
   }
 
   setQuestionsCount = (count: number) => {

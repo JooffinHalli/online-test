@@ -4,6 +4,14 @@ import { root } from 'store';
 import { Responses } from './Responses';
 import styles from './styles.module.css';
 
+const Pre: FC<{ children: string }> = ({ children }) => {
+  const [beforePre, next] = children.split('<pre>');
+  const [between, after] = next.split('</pre>');
+  return (
+    <div>{beforePre}<pre>{between}</pre>{after}</div>
+  );
+}
+
 export const Question: FC = observer(() => {
   const { currentQuestion } = root.questions;
 
@@ -13,10 +21,14 @@ export const Question: FC = observer(() => {
     ? 'Выберите несколько вариантов'
     : 'Выберите один вариант';
 
+  const question = currentQuestion.question.includes('<pre>')
+    ? <Pre>{currentQuestion.question}</Pre>
+    : currentQuestion.question;
+
   return (
     <div className={styles.questionWrapper}>
       <div className={styles.questionHeader}>
-        {currentQuestion.question} {info}
+        {question} {info}
       </div>
       <Responses items={currentQuestion.responses} />
     </div>

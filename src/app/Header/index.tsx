@@ -5,7 +5,7 @@ import { Timer } from './Timer';
 import styles from './styles.module.css'
 
 export const Header: FC = observer(() => {
-
+  
   return (
     <div className={styles.headerWrapper}>
       <Title />
