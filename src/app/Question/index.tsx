@@ -5,6 +5,8 @@ import { Parsed } from 'components';
 import { questionTypeComponent, questionTypeText } from './constants';
 import styles from './styles.module.css';
 
+const space = ' ';
+
 export const Question: FC = observer(() => {
   const { currentQuestion } = root.questions;
 
@@ -17,7 +19,9 @@ export const Question: FC = observer(() => {
     <div className={styles.questionWrapper}>
 
       <div className={styles.questionHeader}>
-        <Parsed>{currentQuestion.question}</Parsed> {info}
+        <Parsed>{currentQuestion.question}</Parsed>
+        {space}
+        {info}
       </div>
 
       <ResComponent />

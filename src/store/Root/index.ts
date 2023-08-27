@@ -1,4 +1,3 @@
-import { Alerts } from './Alerts';
 import { Questions } from './Questions';
 
 export class Root {
@@ -6,6 +5,5 @@ export class Root {
     this.questions.loadQuestions();
   }
 
-  alerts = new Alerts();
   questions = new Questions();
 }

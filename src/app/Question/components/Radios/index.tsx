@@ -7,25 +7,25 @@ import { _ } from 'utils';
 
 type QuestionAnswer = _.Defined<QuestionsRes[number]['answers']>[number]
 
-const renderAnswer = (answer: QuestionAnswer) => {
+const renderAnswer = ({ id, content }: QuestionAnswer) => {
   return (
-    <AntdRadio value={answer.id}>{answer.content}</AntdRadio>
+    <AntdRadio key={id} value={id}>{content}</AntdRadio>
   );
 }
 
 export const Radios: FC = observer(() => {
-  const { currentQuestion } = root.questions;
+  const { currentQuestion, answers } = root.questions;
 
   if (!currentQuestion.answers) return null;
 
-  const [value, setValue] = useState();
-
   const change = (e: RadioChangeEvent) => {
-    setValue(e.target.value);
+    answers.storage.set(currentQuestion.id, e.target.value);
   };
+
+  const value = answers.storage.get(currentQuestion.id);
   
   return (
-    <AntdRadio.Group onChange={change} value={value}>
+    <AntdRadio.Group value={value} onChange={change}>
       <Space direction="vertical">
         {currentQuestion.answers.map(renderAnswer)}
       </Space>

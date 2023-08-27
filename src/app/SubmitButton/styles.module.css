@@ -15,3 +15,12 @@
 .submitButton:active {
   scale: 1;
 }
+
+.disabled {
+  background: var(--color-grey-light);
+  color: var(--color-grey-dark);
+  cursor: default;
+}
+.disabled:hover {
+  scale: 1;
+}
