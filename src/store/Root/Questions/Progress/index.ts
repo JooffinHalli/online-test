@@ -18,8 +18,8 @@ export class Progress {
 
   #sequenceMapper = (value: number, i: number) => i;
 
-  setCurrentQuestionNumber = (value: number) => {
-    this.currentQuestionNumber = value;
+  goToNextQuestion = () => {
+    this.currentQuestionNumber++;
   }
 
   setQuestionsCount = (count: number) => {

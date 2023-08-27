@@ -6,10 +6,10 @@ import { observer } from 'mobx-react-lite';
 
 export const Step: FC<{
 
-  id: number;
+  id: number
 
 }> = observer(({ id }) => {
-  const { currentQuestionNumber, setCurrentQuestionNumber } = root.questions.progress;
+  const { currentQuestionNumber } = root.questions.progress;
   
   const classes = cn(
     styles.step,
@@ -17,14 +17,7 @@ export const Step: FC<{
     id < currentQuestionNumber && styles.passed,
   );
 
-  const click = () => {
-    setCurrentQuestionNumber(id);
-  }
-
   return (
-    <div
-      className={classes}
-      onClick={click}
-    />
+    <div className={classes} />
   );
 });

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Radio as AntdRadio, Space, RadioChangeEvent } from 'antd';
 import { Questions as QuestionsRes } from 'api';

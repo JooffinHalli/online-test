@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react-lite';
-import { cn } from 'utils';
 import { root } from 'store';
+import { cn } from 'utils';
 import styles from './styles.module.css';
 
 export const SubmitButton: FC = observer(() => {
@@ -14,7 +14,8 @@ export const SubmitButton: FC = observer(() => {
   return (
     <button
       className={classes}
-      disabled={true}
+      disabled={root.questions.isSubmitButtonDisabled}
+      onClick={root.questions.progress.goToNextQuestion}
     >
       Ответить
     </button>

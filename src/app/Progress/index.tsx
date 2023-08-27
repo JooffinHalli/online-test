@@ -4,19 +4,21 @@ import { root } from 'store';
 import { Step } from './Step';
 import styles from './styles.module.css';
 
+const renderStep = (stepNumber: number) => {
+  return (
+    <Step
+      key={stepNumber}
+      id={stepNumber}
+    />
+  );
+}
+
 export const Progress: FC = observer(() => {
   const { items } = root.questions.progress;
 
   return (
     <div className={styles.steps}>
-      {items.map((stepNumber) => {
-        return (
-          <Step
-            key={stepNumber}
-            id={stepNumber}
-          />
-        );
-      })}
+      {items.map(renderStep)}
     </div>
   );
 });
