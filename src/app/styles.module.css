@@ -1,6 +1,7 @@
 :root {
   --index: calc(1vw + 1vh);
   --color-grey-dark: #121212;
+  --color-grey-middle: #c1c0c0;
   --color-grey-light: #e1e1e1;
   --color-red: #b92a35;
 }

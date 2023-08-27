@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react-lite';
+import { ConfigProvider } from 'antd';
+import { antdTheme } from 'utils';
 import { Header } from './Header';
 import { Progress } from './Progress';
 import { Question } from './Question';
@@ -10,12 +12,14 @@ import styles from './styles.module.css';
 export const App: FC = observer(() => {
 
   return (
-    <div className={styles.app}>
-      <div className={styles.content}>
-        <Header />
-        <Progress />
-        <Question />
+    <ConfigProvider theme={antdTheme}>
+      <div className={styles.app}>
+        <div className={styles.content}>
+          <Header />
+          <Progress />
+          <Question />
+        </div>
       </div>
-    </div>
+    </ConfigProvider>
   );
 });

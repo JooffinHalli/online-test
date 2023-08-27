@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "out.js",
   "scripts": {
-    "start": "cd esbuild && node esbuild.dev.mjs",
+    "start": "npm-run-all --parallel mock serve",
+    "serve": "cd esbuild && node esbuild.dev.mjs",
     "build": "cd esbuild && node esbuild.prod.mjs",
     "api": "cd npm-scripts && npm run api https://github.com/JooffinHalli/online-test.git main",
     "mock": "cd serverMock && npm run mock",
@@ -22,6 +23,7 @@
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "esbuild": "^0.19.2",
+    "npm-run-all": "^4.1.5",
     "typescript": "^5.2.2"
   }
 }

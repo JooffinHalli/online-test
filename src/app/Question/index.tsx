@@ -2,7 +2,10 @@ import { FC } from 'react';
 import { observer } from 'mobx-react-lite';
 import { root } from 'store';
 import { Parsed } from 'components';
-import { Responses } from './Responses';
+import { Checkboxes } from './Checkboxes';
+import { Radios } from './Radios';
+import { Input } from './Input';
+import { Textarea } from './Textarea';
 import styles from './styles.module.css';
 
 const questionTypeText = {
@@ -12,12 +15,20 @@ const questionTypeText = {
   'textarea': 'Напишите подробный ответ'
 } as const;
 
+const questionTypeComponent = {
+  'radio': () => <Radios />,
+  'checkbox': () => <Checkboxes />,
+  'input': () => <Input />,
+  'textarea': () => <Textarea />,
+} as const;
+
 export const Question: FC = observer(() => {
   const { currentQuestion } = root.questions;
 
   if (!currentQuestion) return null;
   
   const info = questionTypeText[currentQuestion.type];
+  const ResComponent = questionTypeComponent[currentQuestion.type];
 
   return (
     <div className={styles.questionWrapper}>
@@ -26,7 +37,7 @@ export const Question: FC = observer(() => {
         <Parsed>{currentQuestion.question}</Parsed> {info}
       </div>
 
-      {currentQuestion.responses && <Responses items={currentQuestion.responses} />}
+      <ResComponent />
 
     </div>
   );
