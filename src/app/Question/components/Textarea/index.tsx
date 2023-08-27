@@ -15,7 +15,7 @@ export const Textarea: FC = observer(() => {
     answers.storage.set(currentQuestion.id, e.target.value);
   };
 
-  const value = answers.getTyped<'input'>(currentQuestion.id);
+  const value = answers.getTyped<'textarea'>(currentQuestion.id);
 
   return (
     <AntdInput.TextArea
