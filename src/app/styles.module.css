@@ -22,10 +22,14 @@
   align-items: center;
   justify-content: center;
   font-family: sans-serif;
-  color: var(--color-grey-dark);
+  /* color: var(--color-grey-dark); */
 }
 
 .content {
   height: 50%;
   width: 80%;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }

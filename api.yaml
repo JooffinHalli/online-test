@@ -59,12 +59,12 @@ components:
             - checkbox
             - input
             - textarea
-        responses:
+        answers:
           type: array
           items:
-            $ref: "#/components/schemas/QuestionResponseModel"
-    QuestionResponseModel:
-      title: QuestionResponseModel
+            $ref: "#/components/schemas/QuestionAnswerModel"
+    QuestionAnswerModel:
+      title: QuestionAnswerModel
       type: object
       description: Ответ на вопрос
       required:

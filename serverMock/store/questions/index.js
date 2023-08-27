@@ -3,7 +3,7 @@ module.exports = [
     id: 1,
     question: 'Что такое yaml?',
     type: 'radio',
-    responses: [
+    answers: [
       { id: 1, content: 'Язык разметки' },
       { id: 2, content: 'Не язык разметки' }
     ]
@@ -12,7 +12,7 @@ module.exports = [
     id: 2,
     question: 'Что из перечисленного не является ООП принципом?',
     type: 'checkbox',
-    responses: [
+    answers: [
       { id: 1, content: 'Наследование' },
       { id: 2, content: 'Замыкание' },
       { id: 3, content: 'Инкапсуляция' },
@@ -24,7 +24,7 @@ module.exports = [
     id: 3,
     question: 'Что из перечисленного язык программирования?',
     type: 'radio',
-    responses: [
+    answers: [
       { id: 1, content: 'Jenkins' },
       { id: 2, content: 'Go' },
       { id: 3, content: 'Git' },
@@ -36,7 +36,7 @@ module.exports = [
     id: 4,
     question: 'Какова сложность? <pre>[1, 2, 3].reduce((acc, item) => ([...acc, item], acc))</pre>',
     type: 'radio',
-    responses: [
+    answers: [
       { id: 1, content: 'константная' },
       { id: 2, content: 'линейная' },
       { id: 3, content: 'логарифмическая' },
@@ -62,7 +62,7 @@ module.exports = [
     id: 8,
     question: 'Javascript это:',
     type: 'radio',
-    responses: [
+    answers: [
       { id: 1, content: 'функциональный ЯП' },
       { id: 2, content: 'объектно ориентированный ЯП' },
       { id: 3, content: 'Свой вариант', type: 'textarea' }

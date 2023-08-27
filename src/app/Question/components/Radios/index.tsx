@@ -5,22 +5,20 @@ import { Questions as QuestionsRes } from 'api';
 import { root } from 'store';
 import { _ } from 'utils';
 
-type QuestionResponse = _.Defined<QuestionsRes[number]['responses']>[number]
+type QuestionAnswer = _.Defined<QuestionsRes[number]['answers']>[number]
 
-const renderResponse = (response: QuestionResponse) => {
+const renderAnswer = (answer: QuestionAnswer) => {
   return (
-    <AntdRadio value={response.id}>{response.content}</AntdRadio>
+    <AntdRadio value={answer.id}>{answer.content}</AntdRadio>
   );
 }
 
 export const Radios: FC = observer(() => {
   const { currentQuestion } = root.questions;
 
-  if (!currentQuestion.responses) return null;
+  if (!currentQuestion.answers) return null;
 
-  const firstResponseId = currentQuestion.responses[0].id;
-
-  const [value, setValue] = useState(firstResponseId);
+  const [value, setValue] = useState();
 
   const change = (e: RadioChangeEvent) => {
     setValue(e.target.value);
@@ -29,7 +27,7 @@ export const Radios: FC = observer(() => {
   return (
     <AntdRadio.Group onChange={change} value={value}>
       <Space direction="vertical">
-        {currentQuestion.responses.map(renderResponse)}
+        {currentQuestion.answers.map(renderAnswer)}
       </Space>
     </AntdRadio.Group>
   );

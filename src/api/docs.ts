@@ -17,7 +17,7 @@ export type Docs = {
           id: number
           question: string
           type: 'radio' | 'checkbox' | 'input' | 'textarea'
-          responses?: Array<
+          answers?: Array<
             {
               id: number
               content: string

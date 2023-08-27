@@ -5,6 +5,7 @@ import { antdTheme } from 'utils';
 import { Header } from './Header';
 import { Progress } from './Progress';
 import { Question } from './Question';
+import { SubmitButton } from './SubmitButton';
 import styles from './styles.module.css';
 
 // первичная логика начинается в классе Root
@@ -18,6 +19,7 @@ export const App: FC = observer(() => {
           <Header />
           <Progress />
           <Question />
+          <SubmitButton />
         </div>
       </div>
     </ConfigProvider>
