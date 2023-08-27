@@ -3,7 +3,6 @@ import { makeAutoObservable } from 'mobx';
 import { _ } from 'utils';
 
 type Question = Questions[number];
-type QuestionId = Question['id'];
 
 type AnswerByQuestionType = {
   'checkbox': _.Defined<Question['answers']>[number]['id'][]
@@ -12,7 +11,7 @@ type AnswerByQuestionType = {
   'textarea': string
 }
 
-type AnswerInStorage = AnswerByQuestionType[Question['type']];
+type SubmitedAnswer = AnswerByQuestionType[Question['type']];
 
 /** Класс для работы с ответами */
 export class Answers {
@@ -21,9 +20,9 @@ export class Answers {
   }
 
   /** сюда складываются выбранные ответы */
-  storage = new Map<QuestionId, AnswerInStorage>();
+  stack = new Array<SubmitedAnswer>();
 
-  getTyped = <T extends keyof AnswerByQuestionType>(questionId: QuestionId) => {
-    return this.storage.get(questionId) as AnswerByQuestionType[T];
+  getTyped = <T extends keyof AnswerByQuestionType>(index: number) => {
+    return this.stack[index] as AnswerByQuestionType[T];
   }
 }

@@ -14,15 +14,15 @@ const renderAnswer = ({ id, content }: QuestionAnswer) => {
 }
 
 export const Radios: FC = observer(() => {
-  const { currentQuestion, answers } = root.questions;
+  const { currentQuestion, answers, progress } = root.questions;
 
   if (!currentQuestion.answers) return null;
 
   const change = (e: RadioChangeEvent) => {
-    answers.storage.set(currentQuestion.id, e.target.value);
+    answers.stack[progress.currentQuestionNumber] = e.target.value;
   };
 
-  const value = answers.getTyped<'radio'>(currentQuestion.id);
+  const value = answers.getTyped<'radio'>(progress.currentQuestionNumber);
   
   return (
     <AntdRadio.Group value={value} onChange={change}>

@@ -17,19 +17,19 @@ const renderAnswer = ({ id, content }: QuestionAnswer) => {
 const defaultState = new Array<CheckboxValueType>();
 
 export const Checkboxes: FC = observer(() => {
-  const { currentQuestion, answers } = root.questions;
+  const { currentQuestion, answers, progress } = root.questions;
 
   if (!currentQuestion.answers) return null;
 
   const change = (values: CheckboxValueType[]) => {
     if (!values.length) {
-      answers.storage.delete(currentQuestion.id);
+      answers.stack.pop();
       return;
     }
-    answers.storage.set(currentQuestion.id, values.map(Number));
+    answers.stack[progress.currentQuestionNumber] = values.map(Number);
   };
 
-  const values = answers.getTyped<'checkbox'>(currentQuestion.id) || defaultState;
+  const values = answers.getTyped<'checkbox'>(progress.currentQuestionNumber) || defaultState;
   
   return (
     <Checkbox.Group value={values} onChange={change}>

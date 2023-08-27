@@ -11,8 +11,8 @@ export class Root {
     const isFinished = items.length && progress.currentQuestionNumber === items.length;
     if (isFinished) {
       api.questions.post({
-        body: { answers: [...this.questions.answers.storage.values()] }
-      });
+        body: { answers: this.questions.answers.stack }
+      }).catch(console.error);
     }
     return isFinished;
   }

@@ -21,7 +21,7 @@ export class Questions {
 
   get isSubmitButtonDisabled() {
     if (!this.currentQuestion) return true;
-    return !this.answers.storage.has(this.currentQuestion.id);
+    return !this.answers.stack[this.progress.currentQuestionNumber];
   }
 
   #setItems = (data: QuestionsRes) => {

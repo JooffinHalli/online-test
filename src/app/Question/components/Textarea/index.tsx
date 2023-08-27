@@ -5,17 +5,17 @@ import { root } from 'store';
 import styles from './styles.module.css';
 
 export const Textarea: FC = observer(() => {
-  const { currentQuestion, answers } = root.questions;
+  const { answers, progress } = root.questions;
 
   const change = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (!e.target.value.trim().length) {
-      answers.storage.delete(currentQuestion.id);
+      answers.stack.pop();
       return;
     }
-    answers.storage.set(currentQuestion.id, e.target.value);
+    answers.stack[progress.currentQuestionNumber] = e.target.value;
   };
 
-  const value = answers.getTyped<'textarea'>(currentQuestion.id);
+  const value = answers.getTyped<'textarea'>(progress.currentQuestionNumber);
 
   return (
     <AntdInput.TextArea
