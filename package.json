@@ -4,8 +4,8 @@
   "main": "out.js",
   "scripts": {
     "start": "npm-run-all --parallel mock serve",
-    "serve": "cd esbuild && node esbuild.dev.mjs",
-    "build": "cd esbuild && node esbuild.prod.mjs",
+    "serve": "cd esbuild && node esbuild.dev.js",
+    "build": "cd esbuild && node esbuild.prod.js",
     "api": "cd npm-scripts && npm run api https://github.com/JooffinHalli/online-test.git main",
     "mock": "cd serverMock && npm run mock",
     "gen": "cd serverMock && npm run gen",
