@@ -27,6 +27,14 @@ export type Docs = {
         }
       >
     }
+    post: {
+      body: {
+        answers: Array<
+          string | number | Array<number>
+        >
+      }
+      res: string
+    }
   }
 };
 

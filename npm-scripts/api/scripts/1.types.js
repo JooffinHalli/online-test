@@ -193,19 +193,37 @@ class Res {
 
 class SchemaHandler {
 
-  constructor(schema) {
+  constructor(schema, isRequired) {
     this.#original = schema;
+    this.#isRequired = isRequired;
     this.#handle(this.#original);
   }
 
   #original = {};
+  #isRequired = false;
   #acc = null;
 
   get ts() {
     return this.#acc;
   }
 
+  #handleOneOf(schema) {
+    let acc = '';
+    for (const oneSchema of schema.oneOf) {
+      let newType = new SchemaHandler(oneSchema, true).ts;
+      if (Array.isArray(newType)) {
+        newType = `Array<${newType}>`;
+      }
+      acc += `${acc ? ' | ' : ''}${newType}`;
+    }
+    return acc;
+  }
+
   #handle(schema) {
+    if (Array.isArray(schema.oneOf)) {
+      this.#acc = this.#handleOneOf(schema);
+      return;
+    }
     let type = schema.type || (('items' in schema) ? 'array' : undefined);
     if (schema.enum?.length) type = 'enum';
     const handler = this.#TYPE_HANDLER[type];
@@ -221,9 +239,13 @@ class SchemaHandler {
     'array': this.#handleArray.bind(this)
   }
 
-  #handleBoolean() { return 'boolean'; }
-  #handleInteger() { return 'number'; }
-  #handleString() { return 'string'; }
+  #assertNullability(type) {
+    return !this.#isRequired ? `${type}` : type;
+  }
+
+  #handleBoolean() { return this.#assertNullability('boolean'); }
+  #handleInteger() { return this.#assertNullability('number'); }
+  #handleString() { return this.#assertNullability('string'); }
 
   #handleEnum(schema) {
     return schema.enum?.map((value) => `'${value}'`).join(' | ');
@@ -235,13 +257,13 @@ class SchemaHandler {
     for (const field in properties) {
       const subSchema = properties[field];
       const isRequired = required.includes(field);
-      acc[!isRequired ? `${field}?`: field] = new SchemaHandler(subSchema).ts;
+      acc[!isRequired ? `${field}?`: field] = new SchemaHandler(subSchema, isRequired).ts;
     }
     return acc;
   }
 
   #handleArray(schema) {
-    return [this.#handleObject(schema.items)];
+    return [new SchemaHandler(schema.items).ts];
   }
 }
 

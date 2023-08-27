@@ -10,6 +10,7 @@
 /** Говорит, какие есть эндпойнты и методы */
 export const endpoints = {
   questions: [
-    'get'
+    'get',
+    'post'
   ]
 } as const;

@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: center;
   font-family: sans-serif;
-  /* color: var(--color-grey-dark); */
+  color: var(--color-grey-dark);
 }
 
 .content {

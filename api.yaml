@@ -17,11 +17,25 @@ paths:
     get:
       tags:
         - questions
-      summary: Возвращает массив вопросов для теста
-      operationId: getQuestions
       responses:
         200:
           $ref: "#/components/responses/QuestionsResponse"
+    post:
+      tags:
+        - questions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuestionsDto"
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
 
 #  -------------------------------------------------------------------------------------------------------------------
 
@@ -37,6 +51,27 @@ components:
               $ref: "#/components/schemas/QuestionModel"
 
   schemas:
+    QuestionsDto:
+      title: QuestionsDto
+      type: object
+      required:
+        - 'answers'
+      properties:
+        answers:
+          type: array
+          items:
+            oneOf:
+              - type: string
+              - type: integer
+              - type: array
+                items:
+                  type: integer
+
+    QuestionsAnswerModel:
+      title: QuestionsDto
+      type: array
+      items:
+        $ref: "#/components/schemas/QuestionModel"
     QuestionModel:
       title: QuestionModel
       type: object

@@ -1,3 +1,4 @@
+import { api } from 'api';
 import { Questions } from './Questions';
 
 export class Root {
@@ -6,7 +7,14 @@ export class Root {
   }
 
   get testIsFinished() {
-    return this.questions.progress.currentQuestionNumber === this.questions.items.length;
+    const { progress, items } = this.questions;
+    const isFinished = items.length && progress.currentQuestionNumber === items.length;
+    if (isFinished) {
+      api.questions.post({
+        body: { answers: [...this.questions.answers.storage.values()] }
+      });
+    }
+    return isFinished;
   }
 
   questions = new Questions();
