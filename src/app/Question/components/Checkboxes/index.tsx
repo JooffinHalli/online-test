@@ -4,6 +4,7 @@ import { Checkbox, Space } from 'antd';
 import { CheckboxValueType } from 'antd/es/checkbox/Group';
 import { Questions as QuestionsRes } from 'api';
 import { root } from 'store';
+import { AnswerByQuestionType } from 'store/Root/Questions/Answers';
 import { _ } from 'utils';
 
 type QuestionAnswer = _.Defined<QuestionsRes[number]['answers']>[number]
@@ -24,19 +25,15 @@ const Options: FC = observer(() => {
 });
 
 const change = (values: CheckboxValueType[]) => {
-  if (!values.length) {
-    root.questions.answers.stack.pop();
-    return;
-  }
-  root.questions.answers.stack[root.questions.progress.currentQuestionNumber] = values.map(Number);
+  root.questions.answers.set({ type: 'checkbox', value: values.map(Number) });
 };
 
 const defaultState = new Array<CheckboxValueType>();
 
 export const Checkboxes: FC = observer(() => {
-  const { answers, progress } = root.questions;
+  const { answers } = root.questions;
 
-  const values = answers.getTyped<'checkbox'>(progress.currentQuestionNumber) || defaultState;
+  const values = answers.currentValue as AnswerByQuestionType['checkbox'] || defaultState;
   
   return (
     <Checkbox.Group value={values} onChange={change}>

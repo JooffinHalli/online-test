@@ -2,20 +2,17 @@ import { FC, ChangeEvent } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Input as AntdInput } from 'antd';
 import { root } from 'store';
+import { AnswerByQuestionType } from 'store/Root/Questions/Answers';
 import styles from './styles.module.css';
 
 const change = (e: ChangeEvent<HTMLTextAreaElement>) => {
-  if (!e.target.value.trim().length) {
-    root.questions.answers.stack.pop();
-    return;
-  }
-  root.questions.answers.stack[root.questions.progress.currentQuestionNumber] = e.target.value;
+  root.questions.answers.set({ type: 'textarea', value: e.target.value });
 };
 
 export const Textarea: FC = observer(() => {
-  const { answers, progress } = root.questions;
+  const { answers } = root.questions;
 
-  const value = answers.getTyped<'textarea'>(progress.currentQuestionNumber);
+  const value = answers.currentValue as AnswerByQuestionType['textarea'];
 
   return (
     <AntdInput.TextArea

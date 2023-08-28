@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Radio as AntdRadio, Space, RadioChangeEvent } from 'antd';
 import { Questions as QuestionsRes } from 'api';
 import { root } from 'store';
+import { AnswerByQuestionType } from 'store/Root/Questions/Answers';
 import { _ } from 'utils';
 
 type QuestionAnswer = _.Defined<QuestionsRes[number]['answers']>[number]
@@ -23,13 +24,13 @@ const Options: FC = observer(() => {
 });
 
 const change = (e: RadioChangeEvent) => {
-  root.questions.answers.stack[root.questions.progress.currentQuestionNumber] = e.target.value;
+  root.questions.answers.set({ type: 'radio', value: e.target.value });
 };
 
 export const Radios: FC = observer(() => {
-  const { answers, progress } = root.questions;
+  const { answers } = root.questions;
 
-  const value = answers.getTyped<'radio'>(progress.currentQuestionNumber);
+  const value = answers.currentValue as AnswerByQuestionType['radio'];
   
   return (
     <AntdRadio.Group value={value} onChange={change}>
