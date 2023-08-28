@@ -1,9 +1,11 @@
 import { api } from 'api';
 import { Questions } from './Questions';
+import { SubmitedAnswer } from './Questions/Answers';
 
 export class Root {
   constructor() {
     this.questions.loadQuestions();
+    this.#fillStackFromSS();
   }
 
   get testIsFinished() {
@@ -15,6 +17,16 @@ export class Root {
       }).catch(console.error);
     }
     return isFinished;
+  }
+
+  #fillStackFromSS = () => {
+    const newStack = new Array<SubmitedAnswer>();
+    for (const key in sessionStorage) {
+      if (!sessionStorage.hasOwnProperty(key)) continue;
+      newStack[+key] = JSON.parse(sessionStorage.getItem(key)!)
+    }
+    this.questions.answers.stack = newStack;
+    this.questions.progress.currentQuestionNumber = newStack.length;
   }
 
   questions = new Questions();

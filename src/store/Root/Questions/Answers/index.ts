@@ -12,7 +12,7 @@ export type AnswerByQuestionType = {
   'textarea': string
 }
 
-type SubmitedAnswer = {
+export type SubmitedAnswer = {
   type:  keyof AnswerByQuestionType
   value: AnswerByQuestionType[Question['type']];
 }
@@ -48,8 +48,15 @@ export class Answers {
     const thereIsNoAnswer = validator(value);
     if (thereIsNoAnswer) {
       this.stack.pop();
+      sessionStorage.removeItem(
+        `${root.questions.progress.currentQuestionNumber}`
+      );
       return;
     }
+    sessionStorage.setItem(
+      `${root.questions.progress.currentQuestionNumber}`,
+      JSON.stringify(answer)
+    );
     this.stack[root.questions.progress.currentQuestionNumber] = answer;
   }
 

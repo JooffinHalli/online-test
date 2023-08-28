@@ -9,6 +9,8 @@ export const Timer: FC = observer(() => {
 
   const { timer, timeIsOver } = root.questions.timer;
 
+  if (!timer) return null;
+
   return (
     <div className={styles.timerWrapper}>
       <div className={cn(styles.timer, timeIsOver && styles.over)}>
