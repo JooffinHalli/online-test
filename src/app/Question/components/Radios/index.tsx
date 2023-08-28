@@ -13,22 +13,27 @@ const renderAnswer = ({ id, content }: QuestionAnswer) => {
   );
 }
 
+const Options: FC = observer(() => {
+  if (!root.questions.currentQuestion.answers) return null;
+  return (
+    <Space direction="vertical">
+      {root.questions.currentQuestion.answers.map(renderAnswer)}
+    </Space>
+  );
+});
+
+const change = (e: RadioChangeEvent) => {
+  root.questions.answers.stack[root.questions.progress.currentQuestionNumber] = e.target.value;
+};
+
 export const Radios: FC = observer(() => {
-  const { currentQuestion, answers, progress } = root.questions;
-
-  if (!currentQuestion.answers) return null;
-
-  const change = (e: RadioChangeEvent) => {
-    answers.stack[progress.currentQuestionNumber] = e.target.value;
-  };
+  const { answers, progress } = root.questions;
 
   const value = answers.getTyped<'radio'>(progress.currentQuestionNumber);
   
   return (
     <AntdRadio.Group value={value} onChange={change}>
-      <Space direction="vertical">
-        {currentQuestion.answers.map(renderAnswer)}
-      </Space>
+      <Options />
     </AntdRadio.Group>
   );
 });

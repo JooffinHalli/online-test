@@ -4,16 +4,16 @@ import { Input as AntdInput } from 'antd';
 import { root } from 'store';
 import styles from './styles.module.css';
 
+const change = (e: ChangeEvent<HTMLInputElement>) => {
+  if (!e.target.value.trim().length) {
+    root.questions.answers.stack.pop();
+    return;
+  }
+  root.questions.answers.stack[root.questions.progress.currentQuestionNumber] = e.target.value;
+};
+
 export const Input: FC = observer(() => {
   const { answers, progress } = root.questions;
-
-  const change = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.value.trim().length) {
-      answers.stack.pop();
-      return;
-    }
-    answers.stack[progress.currentQuestionNumber] = e.target.value;
-  };
 
   const value = answers.getTyped<'input'>(progress.currentQuestionNumber);
   
