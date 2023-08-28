@@ -4,7 +4,6 @@ import { root } from 'store';
 import { cn } from 'utils';
 import styles from './styles.module.css';
 
-
 export const Timer: FC = observer(() => {
 
   const { timer, timeIsOver } = root.questions.timer;

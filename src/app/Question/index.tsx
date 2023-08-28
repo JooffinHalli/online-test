@@ -1,9 +1,24 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react-lite';
+import { Questions } from 'api';
 import { root } from 'store';
-import { Parsed } from 'components';
-import { questionTypeComponent, questionTypeText } from './constants';
+import * as Components from './AnswerComponents';
+import { Parsed } from './Parsed';
 import styles from './styles.module.css';
+
+export const questionTypeText = {
+  'radio': 'Выберите один вариант',
+  'checkbox': 'Можно выбрать несколько вариантов',
+  'input': 'Напишите ответ',
+  'textarea': 'Напишите подробный ответ'
+} as const;
+
+export const questionTypeComponent: Record<Questions[number]['type'], FC> = {
+  'radio': () => <Components.Radios />,
+  'checkbox': () => <Components.Checkboxes />,
+  'input': () => <Components.Input />,
+  'textarea': () => <Components.Textarea />
+} as const;
 
 const space = ' ';
 

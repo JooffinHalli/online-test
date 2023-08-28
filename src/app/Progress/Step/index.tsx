@@ -1,8 +1,8 @@
 import { FC } from 'react';
+import { observer } from 'mobx-react-lite';
 import { root } from 'store';
 import { cn } from 'utils';
 import styles from './styles.module.css';
-import { observer } from 'mobx-react-lite';
 
 export const Step: FC<{
 
