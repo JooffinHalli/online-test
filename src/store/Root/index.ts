@@ -16,7 +16,7 @@ export class Root {
         body: { answers: this.questions.answers.stack.map(({ value }) => value) }
       }).catch(console.error);
     }
-    return isFinished;
+    return isFinished || this.questions.timer.timeIsOver;
   }
 
   #fillStackFromSS = () => {

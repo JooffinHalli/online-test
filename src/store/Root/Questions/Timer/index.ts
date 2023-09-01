@@ -1,52 +1,81 @@
 import { makeAutoObservable } from 'mobx';
 
-const TIMER_RELOAD_TIME = 'timer-reload-time';
-const TIMER_RELOAD_VALUE = 'timer-reload-value';
-const fifteenMinutes = 60 * 15;
+/** Session Storage */
+class SS {
+
+  #TIMER_END_TIME = 'TIMER_END_TIME';
+  getTimerEndTime = () => sessionStorage.getItem(this.#TIMER_END_TIME);
+  setTimerEndTime<T extends { toString: Function }>(value: T) {
+    sessionStorage.setItem(this.#TIMER_END_TIME, value.toString());
+  }
+
+  #TIMER_PREV_RELOAD_TIME = 'TIMER_PREV_RELOAD_TIME';
+  getTimerPrevReloadTime = () => sessionStorage.getItem(this.#TIMER_PREV_RELOAD_TIME);
+  setTimerPrevReloadTime<T extends { toString: Function }>(value: T) {
+    sessionStorage.setItem(this.#TIMER_PREV_RELOAD_TIME, value.toString());
+  }
+
+}
 
 /** класс для работы с таймером */
 export class Timer {
   constructor() {
     makeAutoObservable(this);
 
-    window.onbeforeunload = () => {
-      sessionStorage.setItem(TIMER_RELOAD_TIME, Date.now().toString());
-      sessionStorage.setItem(TIMER_RELOAD_VALUE, `${this.duration}`);
-    }
-
-    const prevTime = +(sessionStorage.getItem(TIMER_RELOAD_TIME) || 0);
-    const prevSecondsLeft = +(sessionStorage.getItem(TIMER_RELOAD_VALUE) || fifteenMinutes);
-    if (prevTime && prevSecondsLeft) {
-      const now  = Date.now();
-      const defferenceInMs = now - prevTime;
-      const defferenceInSec = Math.floor(defferenceInMs / 1000);
-      const newDuration = prevSecondsLeft - defferenceInSec;
-      this.duration = newDuration;
+    if (!this.#ss.getTimerEndTime()) {
+      this.#ss.setTimerEndTime(this.#endTime);
+      this.#setTimer(14, 59);
     } else {
-      this.duration = fifteenMinutes;
+      const { isFinished, minutes, seconds } = this.#countFromEnd();
+      if (isFinished) {
+        this.timeIsOver = true;
+        return;
+      }
+      this.#setTimer(minutes, seconds);
     }
 
-  }
-
-  duration = 0;
-
-  #addLeadingZero = (number: number) => {
-    return number < 10 ? `0${number}` : `${number}`;
+    window.onbeforeunload = () => {
+      this.#ss.setTimerPrevReloadTime(Date.now());
+    }
   }
 
   timer = '';
   timeIsOver = false;
 
   initCountDown = () => {
+    const { isFinished } = this.#countFromEnd();
+    if (isFinished) {
+      this.timeIsOver = true;
+      return;
+    }
     const timer = setInterval(() => {
-      this.duration--;
-      const minutes = Math.floor(this.duration / 60);
-      const seconds = this.duration % 60;
-      this.timer = `${this.#addLeadingZero(minutes)}:${this.#addLeadingZero(seconds)}`;
-      if (!minutes && !seconds) {
-        clearInterval(timer);
+      const { isFinished, minutes, seconds } = this.#countFromEnd();
+      if (isFinished) {
         this.timeIsOver = true;
+        return clearInterval(timer);
       }
+      this.#setTimer(minutes, seconds);
     }, 1000);
+  }
+
+  #ss = new SS();
+  #fifteenMinutes = 1000 * 60 * 15;
+
+  get #endTime() {
+    return Date.now() + this.#fifteenMinutes;
+  }
+  #addLeadingZero = (number: number) => {
+    return number < 10 ? `0${number}` : `${number}`;
+  }
+  #setTimer = (min: number, sec: number) => {
+    this.timer = `${this.#addLeadingZero(min)}:${this.#addLeadingZero(sec)}`;
+  }
+  #countFromEnd = () => {
+    const end = +(this.#ss.getTimerEndTime() || this.#endTime);
+    const leftSeconds = (end - Date.now()) / 1000;
+    const minutes = Math.floor(leftSeconds / 60);
+    const seconds = Math.floor(leftSeconds % 60);
+    const isFinished = leftSeconds < 1;
+    return { leftSeconds, minutes, seconds, isFinished };
   }
 }
